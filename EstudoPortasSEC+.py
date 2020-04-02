@@ -1,4 +1,38 @@
 from random import choice
+import sqlite3
+from sqlite3 import Error
+
+def create_connection(db_file):
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as e:
+        print(e)
+
+    return conn
+
+
+def select_all_PORTAS(conn):
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM PORTAS")
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+
+def main():
+    database = r"C:\sqlite\db\portlist.db"
+
+    conn = create_connection(database)
+    with conn:
+
+        print("2. Query all tasks")
+        select_all_PORTAS(conn)
+
+
+if __name__ == '__main__':
+    main()
 
 protocols = ['ftp','ssh','telnet','snmp']
 ports = [21,22,23,161]
