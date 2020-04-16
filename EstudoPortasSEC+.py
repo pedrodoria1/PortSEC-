@@ -1,4 +1,9 @@
 from random import choice
+import sqlite3
+
+conn = sqlite3.connect('portas.db')
+cursor = conn.cursor()
+nome_tabela = 'Protocolos'
 
 score = 0
 
@@ -25,10 +30,8 @@ def question():
         print('WRONG!')
         score = score - 1
     print('Resposta: Protocolo {} | Porta {}'.format(randomPort[0],randomPort[1]))
-    print(score)
+    print('Pontuação: {}'.format(score))
     question()
 
-
 question()
-
-
+conn.close
